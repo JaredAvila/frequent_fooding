@@ -14,10 +14,11 @@ const search = async () => {
     state.search = new Search(search);
     // 3. Perpare UI to recieve results
     searchView.clearInput();
+    searchView.clearResults();
     // 4. Search for recipes
     await state.search.getRecipes();
     // 5. Render results in UI
-    console.log(state.search.recipes);
+    searchView.renderRecipes(state.search.recipes);
   }
 };
 
