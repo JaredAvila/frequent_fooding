@@ -8,9 +8,25 @@ export const clearInput = () => {
 
 const displayRecipe = recipe => {
   //Render recipe to DOM
+  let calPerServing;
+  if (recipe.recipe.yield <= 1) {
+    calPerServing = "N/A";
+  } else {
+    calPerServing = Math.floor(recipe.recipe.calories / recipe.recipe.yield);
+  }
   const html = `
                 <li>
-                    <h4>${recipe.recipe.label}</h4>
+                    <img src=${recipe.recipe.image} alt="Recipes">
+                    <div>
+                    <h2>${recipe.recipe.label}</h2>
+                    <h4>Published by: ${recipe.recipe.source}</h4>
+                    <p>Servings: ${
+                      recipe.recipe.yield
+                    } | Calories per serving: ${calPerServing} | Total Calories: ${Math.floor(
+    recipe.recipe.calories
+  )}</p>
+                    </div>
+                    
                 </li>
             `;
 
