@@ -4,10 +4,24 @@
 
   &__list {
     list-style: none;
+
     &--item {
       display: flex;
+      background-color: white;
       padding: 15px;
       margin: 5px;
+      cursor: pointer;
+      transition: $trans-default;
+
+      &:hover {
+        box-shadow: 0 0.2rem 0.6rem rgba(grey, 0.8);
+        transform: translateY(-0.5rem) scale(1.07);
+        z-index: 10;
+      }
+      &:focus {
+        box-shadow: none;
+        transform: translateY(0) scale(1);
+      }
 
       &--label {
         color: $color-red-dark;
