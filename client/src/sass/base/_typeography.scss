@@ -1,0 +1,19 @@
+body {
+  font-family: "Lato", sans-serif;
+  line-height: 1.7;
+  color: $color-dark;
+}
+
+.heading-primary {
+  font-size: 3rem;
+  cursor: default;
+  color: $color-red;
+  font-family: "Akronim", cursive;
+  letter-spacing: 0.5rem;
+  transition: $trans-default;
+
+  &:hover {
+    transform: scale(1.1);
+    color: $color-red-dark;
+  }
+}

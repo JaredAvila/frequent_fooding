@@ -1,5 +1,5 @@
 export const elements = {
-  searchForm: document.querySelector(".search"),
-  searchInput: document.querySelector(".search__input"),
+  searchForm: document.querySelector(".navbar__search"),
+  searchInput: document.querySelector(".navbar__search--input"),
   searchResList: document.querySelector(".recipes__list")
 };

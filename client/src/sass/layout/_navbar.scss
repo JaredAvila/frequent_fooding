@@ -1,0 +1,82 @@
+.navbar {
+  display: flex;
+  background-color: $color-light;
+
+  &__logo {
+    height: 5rem;
+    margin-right: 1.5rem;
+  }
+  &__search {
+    margin: auto;
+    position: relative;
+
+    &--input {
+      padding: 1.5rem;
+      border-radius: 2.5rem;
+      border: none;
+      outline: none;
+      width: 40rem;
+      font-size: 1.6rem;
+      color: $color-dark;
+
+      &::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: $color-grey;
+        opacity: 1; /* Firefox */
+      }
+
+      &:-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: $color-grey;
+      }
+
+      &::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: $color-grey;
+      }
+    }
+    &--btn {
+      padding: 1.5rem 2.5rem;
+      border: none;
+      outline: none;
+      border-top-right-radius: 2.5rem;
+      border-bottom-right-radius: 2.5rem;
+      position: absolute;
+      right: 0rem;
+      top: 0rem;
+      cursor: pointer;
+      font-size: 1.6rem;
+      background-image: linear-gradient(
+        to bottom right,
+        $color-red-light 20%,
+        $color-red 60%,
+        $color-red-dark
+      );
+      color: $color-light;
+      text-transform: uppercase;
+      transition: all 300ms ease;
+
+      &:hover {
+        background-image: linear-gradient(
+          to bottom right,
+          rgba($color-red-light, 0.8) 20%,
+          rgba($color-red, 0.8) 60%,
+          rgba($color-red-dark, 0.8)
+        );
+      }
+
+      &:active {
+        background-image: linear-gradient(
+          to bottom right,
+          rgba($color-red-light, 0.9) 20%,
+          rgba($color-red, 0.9) 60%,
+          rgba($color-red-dark, 0.9)
+        );
+      }
+
+      i {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

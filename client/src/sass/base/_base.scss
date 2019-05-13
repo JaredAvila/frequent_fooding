@@ -1,0 +1,29 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%; //1rem = 10px, 10/16 = .625 * 100 = 62.5%
+}
+
+body {
+  box-sizing: border-box;
+  padding: 2rem;
+  background-image: linear-gradient(
+    to bottom right,
+    $color-red-light,
+    $color-red
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container {
+  padding: 2rem;
+  background-color: $color-light;
+  border-radius: 0.2rem;
+}
