@@ -2,6 +2,7 @@ import "../sass/main.scss";
 import * as searchView from "./views/searchView";
 import { elements as el } from "./views/base";
 import Search from "./models/Search";
+import Recipe from "./models/Recipe";
 
 // Global State
 const state = {};
@@ -34,6 +35,17 @@ el.paginationBtns.addEventListener("click", e => {
     const nextPage = parseInt(btn.dataset.pagenum);
     searchView.clearResults();
     searchView.renderRecipes(state.search.recipes, nextPage);
+  }
+});
+
+el.searchResList.addEventListener("click", e => {
+  const recipe = e.target.closest(".recipes__list--item");
+  if (recipe) {
+    const id = parseInt(recipe.dataset.id);
+    state.curRecipe = new Recipe(state.search.recipes[id].recipe);
+    console.log(state.curRecipe);
+    searchView.clearRecipe();
+    searchView.renderRecipe(state.curRecipe);
   }
 });
 

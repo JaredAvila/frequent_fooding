@@ -6,16 +6,12 @@ export const clearInput = () => {
   el.searchInput.value = "";
 };
 
-const displayRecipe = recipe => {
+const displayRecipe = (recipe, recipes) => {
   //Render recipe to DOM
-  let calPerServing;
-  if (recipe.recipe.yield <= 1) {
-    calPerServing = "N/A";
-  } else {
-    calPerServing = Math.floor(recipe.recipe.calories / recipe.recipe.yield);
-  }
   const html = `
-                <li class="recipes__list--item">
+                <li class="recipes__list--item" data-id=${recipes.indexOf(
+                  recipe
+                )}>
                     <img class="recipes__list--item--img" src=${
                       recipe.recipe.image
                     } alt="Recipes">
@@ -75,8 +71,19 @@ const paginationBtns = (page, numRes, numPerPage) => {
 export const renderRecipes = (recipes, page = 1, numPerPage = 10) => {
   const start = (page - 1) * numPerPage;
   const end = page * numPerPage;
-  recipes.slice(start, end).forEach(displayRecipe);
+  recipes.slice(start, end).forEach(recipe => displayRecipe(recipe, recipes));
   paginationBtns(page, recipes.length, numPerPage);
+};
+
+export const renderRecipe = recipe => {
+  const html = `
+            <h1>${recipe.title}</h1>
+  `;
+  el.recipePage.innerHTML = html;
+};
+
+export const clearRecipe = () => {
+  el.recipePage.innerHTML = "";
 };
 
 export const clearResults = () => {
