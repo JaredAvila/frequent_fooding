@@ -28,4 +28,13 @@ el.searchForm.addEventListener("submit", e => {
   search();
 });
 
+el.paginationBtns.addEventListener("click", e => {
+  const btn = e.target.closest(".recipes__pagination--btn");
+  if (btn) {
+    const nextPage = parseInt(btn.dataset.pagenum);
+    searchView.clearResults();
+    searchView.renderRecipes(state.search.recipes, nextPage);
+  }
+});
+
 //https://api.edamam.com/search?q=chicken&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=3&calories=591-722&health=alcohol-free

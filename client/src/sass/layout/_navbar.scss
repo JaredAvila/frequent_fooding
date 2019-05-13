@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  margin-bottom: 4rem;
+  padding: 2rem;
 
   &__logo {
     height: 5rem;
@@ -57,12 +57,7 @@
       transition: all 300ms ease;
 
       &:hover {
-        background-image: linear-gradient(
-          to bottom right,
-          rgba($color-red-light, 0.8) 20%,
-          rgba($color-red, 0.8) 60%,
-          rgba($color-red-dark, 0.8)
-        );
+        transform: scale(1.1);
       }
 
       &:active {
