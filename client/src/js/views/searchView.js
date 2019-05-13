@@ -77,9 +77,42 @@ export const renderRecipes = (recipes, page = 1, numPerPage = 10) => {
 
 export const renderRecipe = recipe => {
   const html = `
-            <h1>${recipe.title}</h1>
+            <div class="recipe">
+              <div class="recipe__top">
+                <img class="recipe__top--img" src=${
+                  recipe.img
+                } alt="recipe image" />
+                <div class="recipe__top--info">
+                  <h2 class="recipe__top--info-title">${recipe.title}</h2>
+                  <h4 class="recipe__top--info-author">${recipe.author}</h4>
+                  <p class="recipe__top--info-servings"><i class="fas fa-utensils"></i> Serves: ${
+                    recipe.servings
+                  }</p>
+                  <p class="recipe__top--info-calPer"><i class="fas fa-fire"></i> Calories per serving: ${
+                    recipe.servings > 1
+                      ? Math.floor(recipe.cal / recipe.servings)
+                      : "N/A"
+                  }</p>
+
+                </div>
+              </div>
+              
+            </div>
   `;
   el.recipePage.innerHTML = html;
+};
+
+export const addActive = node => {
+  node.classList.add("active");
+};
+
+export const removeActive = () => {
+  let x = el.searchResList.childNodes;
+  for (let y of x) {
+    if (y.classList) {
+      y.classList.remove("active");
+    }
+  }
 };
 
 export const clearRecipe = () => {

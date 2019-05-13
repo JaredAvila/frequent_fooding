@@ -50,11 +50,16 @@ el.paginationBtns.addEventListener("click", e => {
 el.searchResList.addEventListener("click", e => {
   const recipe = e.target.closest(".recipes__list--item");
   if (recipe) {
+    //get recipe ID
     const id = parseInt(recipe.dataset.id);
+    //create new recipe
     state.curRecipe = new Recipe(state.search.recipes[id].recipe);
+    //prepare UI for recipe
     searchView.clearRecipe();
     searchView.renderRecipe(state.curRecipe);
+    searchView.removeActive();
+    searchView.addActive(recipe);
+    //scroll back to top
+    window.scrollTo(0, 0);
   }
 });
-
-//https://api.edamam.com/search?q=chicken&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&from=0&to=3&calories=591-722&health=alcohol-free
