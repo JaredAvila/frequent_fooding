@@ -1,6 +1,6 @@
 .navbar {
   display: flex;
-  background-color: $color-light;
+  margin-bottom: 4rem;
 
   &__logo {
     height: 5rem;
@@ -76,6 +76,27 @@
 
       i {
         margin-right: 0.5rem;
+      }
+    }
+  }
+
+  &__favorites {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    i {
+      font-size: 3rem;
+      color: $color-dark;
+      cursor: pointer;
+      transition: all 300ms ease;
+
+      &:hover {
+        color: $color-red-light;
+      }
+
+      &:active {
+        color: $color-red-dark;
       }
     }
   }

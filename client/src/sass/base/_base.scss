@@ -15,8 +15,9 @@ body {
   padding: 2rem;
   background-image: linear-gradient(
     to bottom right,
-    $color-red-light,
-    $color-red
+    $color-red-light 20%,
+    $color-red 60%,
+    $color-red-dark
   );
   background-size: cover;
   background-repeat: no-repeat;
