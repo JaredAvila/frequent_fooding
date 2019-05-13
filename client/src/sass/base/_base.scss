@@ -27,3 +27,14 @@ body {
   background-color: $color-light;
   border-radius: 0.2rem;
 }
+
+.spinner {
+  width: fit-content;
+  margin: auto;
+  padding: 2rem;
+
+  img {
+    height: 7rem;
+    animation: rotating 1s linear infinite;
+  }
+}

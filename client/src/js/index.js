@@ -1,6 +1,10 @@
 import "../sass/main.scss";
 import * as searchView from "./views/searchView";
-import { elements as el } from "./views/base";
+import {
+  elements as el,
+  loadingSpinner as spinner,
+  clearSpinner
+} from "./views/base";
 import Search from "./models/Search";
 import Recipe from "./models/Recipe";
 
@@ -16,11 +20,16 @@ const search = async () => {
     // 3. Perpare UI to recieve results
     searchView.clearInput();
     searchView.clearResults();
+    spinner(el.searchResList);
     // 4. Search for recipes
-    await state.search.getRecipes();
-    // 5. Render results in UI
-    searchView.renderRecipes(state.search.recipes);
-    console.log(state.search.recipes);
+    try {
+      await state.search.getRecipes();
+      // 5. Render results in UI
+      searchView.renderRecipes(state.search.recipes);
+    } catch (error) {
+      console.log(error);
+    }
+    clearSpinner();
   }
 };
 
@@ -43,7 +52,6 @@ el.searchResList.addEventListener("click", e => {
   if (recipe) {
     const id = parseInt(recipe.dataset.id);
     state.curRecipe = new Recipe(state.search.recipes[id].recipe);
-    console.log(state.curRecipe);
     searchView.clearRecipe();
     searchView.renderRecipe(state.curRecipe);
   }
