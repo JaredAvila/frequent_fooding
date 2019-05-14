@@ -12,6 +12,8 @@ import Recipe from "./models/Recipe";
 // Global State
 const state = {};
 
+el.recipePage.innerHTML = `<p class="noRecipes">Search for a recipe</p>`;
+
 const search = async () => {
   // 1. Get input from view
   const search = searchView.getInput();

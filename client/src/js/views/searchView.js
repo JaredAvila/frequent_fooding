@@ -78,20 +78,34 @@ export const renderRecipes = (recipes, page = 1, numPerPage = 10) => {
   paginationBtns(page, recipes.length, numPerPage);
 };
 
-const getNutritionalInfo = info => {
+const getNutritionalInfo = (info, servings) => {
+  //  loop through array, parse info and create array of HTML
   let nutritionalArray = [];
   info.forEach(fact => {
     let html = `
               <div class="nutrition__flex nutrition__bottom-border">
-                <p>${fact.label} ${Math.floor(fact.total)}${fact.unit}</p>
-                <p>${Math.floor(fact.daily)}%</p>
+                <p>${fact.label} ${Math.floor(fact.total / servings)}${
+      fact.unit
+    }</p>
+                <p>${Math.floor(fact.daily / servings)}%</p>
               </div>
               `;
     nutritionalArray.push(html);
   });
   nutritionalArray.push(`
   <div class="black_spacer_large"></div>`);
+  // join array and return
   return nutritionalArray.join("");
+};
+
+const getIngredients = ingredients => {
+  // loop through array and create array of HTML
+  let ingrArray = [];
+  ingredients.forEach(ing => {
+    ingrArray.push(`<li class="ingList__item">${ing}</li>`);
+  });
+  // join array and return
+  return ingrArray.join("");
 };
 
 export const renderRecipe = recipe => {
@@ -138,10 +152,18 @@ export const renderRecipe = recipe => {
                       <p></p>
                       <p>%Daily Value*</p>
                     </div>
-                      ${getNutritionalInfo(recipe.nutrition)}
+                      ${getNutritionalInfo(recipe.nutrition, recipe.servings)}
                     <p class="nutrition__info">*Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be highter or lower depending on your calorie needs.</p>
                 </div>
-              </div>
+                <div class="recipe__bottom__left">
+                  <ul class="recipe__bottom--ingList">
+                    <p class="recipe__bottom--ingList-title">Ingredients</p>
+                    ${getIngredients(recipe.ingredients)}
+                  </ul>
+                  <a target="_blank" class="recipe__bottom--ingList-link" href="${
+                    recipe.url
+                  }">Read Directions</a>
+                </div>   
             </div>
   `;
   el.recipePage.innerHTML = html;

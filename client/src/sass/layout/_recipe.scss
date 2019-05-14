@@ -1,5 +1,5 @@
 .recipe {
-  border-top: 1px solid $color-dark;
+  padding: 0 2rem;
 
   &__top {
     display: flex;
@@ -43,6 +43,8 @@
     }
   }
   &__bottom {
+    display: flex;
+
     .nutrition {
       width: 27.5rem;
       margin: 2rem 1rem;
@@ -66,7 +68,48 @@
         border-bottom: 1px solid $color-dark;
       }
     }
+
+    &--ingList {
+      padding: 2rem;
+      background-color: white;
+      margin: 2rem;
+      font-size: 1.8rem;
+
+      &-title {
+        font-size: 3rem;
+        font-weight: 300;
+        border-bottom: 2px solid black;
+        color: orangered;
+        text-align: center;
+      }
+
+      &-link {
+        background-color: orangered;
+        color: white;
+        padding: 1rem 2rem;
+        font-size: 1.8rem;
+        text-decoration: none;
+        border-radius: 2px;
+        width: fit-content;
+        align-self: center;
+        transition: $trans-default;
+
+        &:hover {
+          transform: translateY(-0.7rem);
+          box-shadow: 0 0.3rem 0.8rem rgba($color-dark, 0.8);
+        }
+
+        &:active {
+          transform: translateY(-0.2rem);
+          box-shadow: 0 0.1rem 0.6rem rgba($color-dark, 0.6);
+        }
+      }
+    }
   }
+}
+
+.ingList__item {
+  margin-left: 2rem;
 }
 
 .black_spacer_large {
@@ -79,4 +122,10 @@
   height: 0.5rem;
   background-color: #272727;
   width: 100%;
+}
+
+.recipe__bottom__left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
