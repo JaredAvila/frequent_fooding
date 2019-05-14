@@ -1,6 +1,7 @@
 .recipes {
   background-color: white;
   width: 25%;
+  height: fit-content;
 
   &__list {
     list-style: none;
@@ -69,6 +70,7 @@
 
 .active {
   background-color: $color-red-light;
+  cursor: default;
   &:hover {
     box-shadow: none !important;
     transform: translateY(0) scale(1) !important;

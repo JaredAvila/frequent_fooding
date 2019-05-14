@@ -1,5 +1,6 @@
 import "../sass/main.scss";
 import * as searchView from "./views/searchView";
+import * as recipeView from "./views/recipeView";
 import {
   elements as el,
   loadingSpinner as spinner,
@@ -12,7 +13,7 @@ import Recipe from "./models/Recipe";
 // Global State
 const state = {};
 
-el.recipePage.innerHTML = `<p class="noRecipes">Search for a recipe</p>`;
+// Search Controller
 
 const search = async () => {
   // 1. Get input from view
@@ -50,6 +51,10 @@ el.paginationBtns.addEventListener("click", e => {
   }
 });
 
+// Recipe Controller
+
+recipeView.noRecipe();
+
 el.searchResList.addEventListener("click", e => {
   const recipe = e.target.closest(".recipes__list--item");
   if (recipe) {
@@ -58,9 +63,8 @@ el.searchResList.addEventListener("click", e => {
     //create new recipe
     state.curRecipe = new Recipe(state.search.recipes[id].recipe);
     //prepare UI for recipe
-    searchView.clearRecipe();
-    searchView.renderRecipe(state.curRecipe);
-    searchView.removeActive();
+    recipeView.clearRecipe();
+    recipeView.renderRecipe(state.curRecipe);
     searchView.addActive(recipe);
     //scroll back to top
     window.scrollTo(0, 0);

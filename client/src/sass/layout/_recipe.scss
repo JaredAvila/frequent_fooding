@@ -49,6 +49,7 @@
       width: 27.5rem;
       margin: 2rem 1rem;
       padding: 0.5rem;
+      height: fit-content;
       font-size: 1.3rem;
       border: 0.25rem solid $color-dark;
       background-color: white;
@@ -72,6 +73,7 @@
     &--ingList {
       padding: 2rem;
       background-color: white;
+      height: fit-content;
       margin: 2rem;
       font-size: 1.8rem;
 
