@@ -1,0 +1,17 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $color-light;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+
+  .swag {
+    padding-left: 2rem;
+  }
+
+  p {
+    padding: 2.5rem;
+    font-size: 1.6rem;
+  }
+}

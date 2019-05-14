@@ -3,7 +3,8 @@ import * as searchView from "./views/searchView";
 import {
   elements as el,
   loadingSpinner as spinner,
-  clearSpinner
+  clearSpinner,
+  displayFooter
 } from "./views/base";
 import Search from "./models/Search";
 import Recipe from "./models/Recipe";
@@ -63,3 +64,5 @@ el.searchResList.addEventListener("click", e => {
     window.scrollTo(0, 0);
   }
 });
+
+displayFooter();

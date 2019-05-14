@@ -51,7 +51,7 @@ const createButton = (page, type) => {
 
 const paginationBtns = (page, numRes, numPerPage) => {
   const pages = Math.ceil(numRes / numPerPage);
-  let button;
+  let button = "";
   if (page === 1 && pages > 1) {
     //NEXT button
     button = createButton(page, "NEXT");
@@ -65,6 +65,9 @@ const paginationBtns = (page, numRes, numPerPage) => {
     //PREV button
     button = createButton(page, "PREV");
   }
+  if (button === "" && numRes <= 0) {
+    button = `<div class="noResults">Sorry, your search produced no results. Try again.</div>`;
+  }
   el.paginationBtns.insertAdjacentHTML("afterbegin", button);
 };
 
@@ -75,7 +78,24 @@ export const renderRecipes = (recipes, page = 1, numPerPage = 10) => {
   paginationBtns(page, recipes.length, numPerPage);
 };
 
+const getNutritionalInfo = info => {
+  let nutritionalArray = [];
+  info.forEach(fact => {
+    let html = `
+              <div class="nutrition__flex nutrition__bottom-border">
+                <p>${fact.label} ${Math.floor(fact.total)}${fact.unit}</p>
+                <p>${Math.floor(fact.daily)}%</p>
+              </div>
+              `;
+    nutritionalArray.push(html);
+  });
+  nutritionalArray.push(`
+  <div class="black_spacer_large"></div>`);
+  return nutritionalArray.join("");
+};
+
 export const renderRecipe = recipe => {
+  console.log(recipe);
   const html = `
             <div class="recipe">
               <div class="recipe__top">
@@ -96,7 +116,32 @@ export const renderRecipe = recipe => {
 
                 </div>
               </div>
-              
+              <div class="recipe__bottom">
+                  <div class="nutrition">
+                    <p class="nutrition__title">Nutrition Facts</p>
+                    <p class="nutrition__info>Serving Size 1</p>
+                    <p class="nutrition__info>Servings Per Recipe ${
+                      recipe.servings
+                    }</p>
+                    <div class="black_spacer_large"></div>
+                    <p class="nutrition__info nutrition__bottom-border">Amount Per Serving</p>
+                    <div class="nutrition__flex">
+                      <p>Calories ${
+                        recipe.servings > 1
+                          ? Math.floor(recipe.cal / recipe.servings)
+                          : "N/A"
+                      }</p>
+                      <p> </p>
+                    </div>
+                    <div class="black_spacer_normal"></div>
+                    <div class="nutrition__flex">
+                      <p></p>
+                      <p>%Daily Value*</p>
+                    </div>
+                      ${getNutritionalInfo(recipe.nutrition)}
+                    <p class="nutrition__info">*Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be highter or lower depending on your calorie needs.</p>
+                </div>
+              </div>
             </div>
   `;
   el.recipePage.innerHTML = html;
