@@ -25,7 +25,6 @@ const displayRecipe = (recipe, recipes) => {
                     </div>
                 </li>
             `;
-
   el.searchResList.insertAdjacentHTML("beforeend", html);
 };
 

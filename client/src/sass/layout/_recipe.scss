@@ -72,6 +72,7 @@
 
     &--ingList {
       padding: 2rem;
+
       background-color: white;
       height: fit-content;
       margin: 2rem;
@@ -112,6 +113,11 @@
 
 .ingList__item {
   margin-left: 2rem;
+  padding-right: 1rem;
+
+  &:hover > .addToList {
+    opacity: 1;
+  }
 }
 
 .black_spacer_large {
@@ -130,4 +136,12 @@
   display: flex;
   flex-direction: column;
   width: 50%;
+}
+
+.addToList {
+  opacity: 0;
+  color: $color-red;
+  padding: 1rem;
+  transition: $trans-default;
+  cursor: pointer;
 }

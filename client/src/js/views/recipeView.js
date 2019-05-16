@@ -1,4 +1,5 @@
 import { elements as el } from "./base";
+import * as math from "mathjs";
 
 const getNutritionalInfo = (info, servings) => {
   //  loop through array, parse info and create array of HTML
@@ -20,11 +21,19 @@ const getNutritionalInfo = (info, servings) => {
   return nutritionalArray.join("");
 };
 
-const getIngredients = ingredients => {
+export const getIngredientsArray = ingredients => {
+  let ingArray = [];
+  ingredients.forEach(el => ingArray.push(el));
+  return ingArray;
+};
+
+const getIngredientsString = ingredients => {
   // loop through array and create array of HTML
   let ingrArray = [];
   ingredients.forEach(ing => {
-    ingrArray.push(`<li class="ingList__item">${ing}</li>`);
+    ingrArray.push(
+      `<li class="ingList__item">${ing}<span class="addToList"><i class="fas fa-plus-circle"></i></span></li>`
+    );
   });
   // join array and return
   return ingrArray.join("");
@@ -79,7 +88,7 @@ export const renderRecipe = recipe => {
                   <div class="recipe__bottom__left">
                     <ul class="recipe__bottom--ingList">
                       <p class="recipe__bottom--ingList-title">Ingredients</p>
-                      ${getIngredients(recipe.ingredients)}
+                      ${getIngredientsString(recipe.ingredients)}
                     </ul>
                     <a target="_blank" class="recipe__bottom--ingList-link" href="${
                       recipe.url
