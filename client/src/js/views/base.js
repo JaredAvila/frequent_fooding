@@ -7,7 +7,8 @@ export const elements = {
   recipePage: document.querySelector(".display-recipe"),
   footer: document.querySelector(".footer"),
   ingredientsList: document.querySelector(".display-recipe"),
-  shoppingList: document.querySelector(".shopping__list-list")
+  shoppingList: document.querySelector(".shopping_list-list"),
+  addButton: document.querySelector(".addToList")
 };
 
 export const loadingSpinner = parent => {

@@ -46,7 +46,7 @@
     display: flex;
 
     .nutrition {
-      width: 27.5rem;
+      flex: 1;
       margin: 2rem 1rem;
       padding: 0.5rem;
       height: fit-content;
@@ -70,12 +70,16 @@
       }
     }
 
-    &--ingList {
-      padding: 2rem;
+    &__left {
+      flex: 1;
+    }
 
+    &--ingList {
+      padding: 2rem 0;
+      list-style: none;
       background-color: white;
       height: fit-content;
-      margin: 2rem;
+      margin: 2rem 0;
       font-size: 1.8rem;
 
       &-title {
@@ -113,11 +117,8 @@
 
 .ingList__item {
   margin-left: 2rem;
-  padding-right: 1rem;
-
-  &:hover > .addToList {
-    opacity: 1;
-  }
+  padding: 1rem 1rem 1rem 0;
+  cursor: default;
 }
 
 .black_spacer_large {
@@ -135,13 +136,10 @@
 .recipe__bottom__left {
   display: flex;
   flex-direction: column;
-  width: 50%;
 }
 
 .addToList {
-  opacity: 0;
-  color: $color-red;
+  color: green;
   padding: 1rem;
-  transition: $trans-default;
   cursor: pointer;
 }

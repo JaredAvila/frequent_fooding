@@ -1,4 +1,23 @@
 .shopping_list {
   width: 25%;
   background-color: white;
+
+  &-list {
+    list-style: none;
+  }
+}
+
+.listItem {
+  color: $color-dark;
+  padding: 1rem;
+  font-size: 1.6rem;
+  cursor: default;
+
+  i {
+    color: $color-red;
+    cursor: pointer;
+  }
+  span {
+    display: none;
+  }
 }

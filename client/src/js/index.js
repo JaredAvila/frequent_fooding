@@ -42,6 +42,14 @@ const search = async () => {
   }
 };
 
+const toggleAddButton = (btn, type) => {
+  if (btn) {
+    type
+      ? (btn.style.visibility = "hidden")
+      : (btn.style.visibility = "visible");
+  }
+};
+
 el.searchForm.addEventListener("submit", e => {
   e.preventDefault();
   search();
@@ -76,14 +84,26 @@ el.searchResList.addEventListener("click", e => {
   }
 });
 
-// List Controller
+// Ingredients Controller
 el.ingredientsList.addEventListener("click", e => {
   // Get list string
   const listITem = e.target.closest(".ingList__item").innerHTML;
   // Add new item to Shopping List
   if (!state.list) state.list = new List();
-  const newItem = state.list.addItem(listITem);
+  const button = e.target.closest(".addToList");
+  const newItem = state.list.addItem(listITem, button);
   // Update UI
   listView.addListItem(newItem);
+  toggleAddButton(button, true);
+});
+
+// List Controller
+el.shoppingList.addEventListener("click", e => {
+  // Remove Item from list
+  const id = e.target.closest(".listItem").dataset.itemid;
+  const btn = state.list.removeItem(id);
+  // Update UI
+  listView.deleteListItem(id);
+  toggleAddButton(btn, false);
 });
 displayFooter();

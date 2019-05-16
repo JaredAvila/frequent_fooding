@@ -15,8 +15,7 @@ const getNutritionalInfo = (info, servings) => {
                 `;
     nutritionalArray.push(html);
   });
-  nutritionalArray.push(`
-    <div class="black_spacer_large"></div>`);
+  nutritionalArray.push(`<div class="black_spacer_large"></div>`);
   // join array and return
   return nutritionalArray.join("");
 };
@@ -32,7 +31,7 @@ const getIngredientsString = ingredients => {
   let ingrArray = [];
   ingredients.forEach(ing => {
     ingrArray.push(
-      `<li class="ingList__item">${ing}<span class="addToList"><i class="fas fa-plus-circle"></i></span></li>`
+      `<li class="ingList__item"><span class="addToList"><i class="fas fa-plus-circle"></i></span> ${ing}</li>`
     );
   });
   // join array and return
