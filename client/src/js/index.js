@@ -1,6 +1,7 @@
 import "../sass/main.scss";
 import * as searchView from "./views/searchView";
 import * as recipeView from "./views/recipeView";
+import * as listView from "./views/listView";
 import {
   elements as el,
   loadingSpinner as spinner,
@@ -9,9 +10,13 @@ import {
 } from "./views/base";
 import Search from "./models/Search";
 import Recipe from "./models/Recipe";
+import List from "./models/List";
 
 // Global State
 const state = {};
+
+//TESTING
+window.state = state;
 
 // Search Controller
 
@@ -71,4 +76,14 @@ el.searchResList.addEventListener("click", e => {
   }
 });
 
+// List Controller
+el.ingredientsList.addEventListener("click", e => {
+  // Get list string
+  const listITem = e.target.closest(".ingList__item").innerHTML;
+  // Add new item to Shopping List
+  if (!state.list) state.list = new List();
+  const newItem = state.list.addItem(listITem);
+  // Update UI
+  listView.addListItem(newItem);
+});
 displayFooter();

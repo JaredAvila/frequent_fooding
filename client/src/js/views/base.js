@@ -5,7 +5,9 @@ export const elements = {
   allListItems: document.querySelectorAll(".recipes__list"),
   paginationBtns: document.querySelector(".recipes__pagination"),
   recipePage: document.querySelector(".display-recipe"),
-  footer: document.querySelector(".footer")
+  footer: document.querySelector(".footer"),
+  ingredientsList: document.querySelector(".display-recipe"),
+  shoppingList: document.querySelector(".shopping__list-list")
 };
 
 export const loadingSpinner = parent => {
