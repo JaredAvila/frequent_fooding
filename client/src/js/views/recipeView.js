@@ -48,9 +48,12 @@ export const renderRecipe = recipe => {
                   <div class="recipe__top--info">
                     <h2 class="recipe__top--info-title">${recipe.title}</h2>
                     <h4 class="recipe__top--info-author">${recipe.author}</h4>
+                    <div class="recipe__top--info-servingsLikes">
                     <p class="recipe__top--info-servings"><i class="fas fa-utensils"></i> Serves: ${
                       recipe.servings
                     }</p>
+                    <p class="like-btn"><i class="far fa-heart"></i></p>
+                    </div>
                     <p class="recipe__top--info-calPer"><i class="fas fa-fire"></i> Calories per serving: ${
                       recipe.servings > 1
                         ? Math.floor(recipe.cal / recipe.servings)

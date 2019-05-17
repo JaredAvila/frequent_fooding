@@ -2,6 +2,7 @@ import "../sass/main.scss";
 import * as searchView from "./views/searchView";
 import * as recipeView from "./views/recipeView";
 import * as listView from "./views/listView";
+import * as likesView from "./views/likesView";
 import {
   elements as el,
   loadingSpinner as spinner,
@@ -11,6 +12,7 @@ import {
 import Search from "./models/Search";
 import Recipe from "./models/Recipe";
 import List from "./models/List";
+import Likes from "./models/Likes";
 
 // Global State
 const state = {};
@@ -84,17 +86,50 @@ el.searchResList.addEventListener("click", e => {
   }
 });
 
-// Ingredients Controller
+// Ingredients/Likes Controller
 el.ingredientsList.addEventListener("click", e => {
+  // Add to shopping list
   // Get list string
-  const listITem = e.target.closest(".ingList__item").innerHTML;
-  // Add new item to Shopping List
-  if (!state.list) state.list = new List();
-  const button = e.target.closest(".addToList");
-  const newItem = state.list.addItem(listITem, button);
-  // Update UI
-  listView.addListItem(newItem);
-  toggleAddButton(button, true);
+  if (e.target.closest(".ingList__item")) {
+    const listITem = e.target.closest(".ingList__item").innerHTML;
+    // Add new item to Shopping List
+    if (!state.list) state.list = new List();
+    const button = e.target.closest(".addToList");
+    const newItem = state.list.addItem(listITem, button);
+    // Update UI
+    listView.addListItem(newItem);
+    toggleAddButton(button, true);
+
+    // add to Likes list
+  } else if (e.target.closest(".like-btn")) {
+    // check state for likes, create if none.
+    if (!state.likes) state.likes = new Likes();
+    // add/remove recipe
+    if (
+      state.likes.likes.findIndex(
+        e => e.recipe.title === state.curRecipe.title
+      ) !== -1
+    ) {
+      // toggle button
+      e.target.closest(".like-btn").innerHTML = likesView.toggleLikesBtn(true);
+      // remove recipe from likes
+      const like = state.likes.likes.findIndex(
+        e => e.recipe.title === state.curRecipe.title
+      );
+      state.likes.removeLike(like.id);
+    } else if (
+      state.likes.likes.findIndex(
+        e => e.recipe.title === state.curRecipe.title
+      ) === -1
+    ) {
+      state.likes.addLike(state.curRecipe);
+      // UI: toggle likes button
+      e.target.closest(".like-btn").innerHTML = likesView.toggleLikesBtn(false);
+      // UI: update UI in navbar
+    }
+
+    console.log(state.likes);
+  }
 });
 
 // List Controller

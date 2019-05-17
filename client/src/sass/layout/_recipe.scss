@@ -22,6 +22,19 @@
         background-color: white;
         margin-bottom: 1rem;
       }
+
+      &-servingsLikes {
+        display: flex;
+        justify-content: space-between;
+
+        i {
+          font-size: 1.8rem;
+          color: $color-dark;
+          padding: 1.2rem;
+          cursor: pointer;
+        }
+      }
+
       &-servings {
         font-size: 2rem;
         color: $color-red;
