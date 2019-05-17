@@ -25,7 +25,7 @@ export const getIngredientsArray = ingredients => {
   return ingArray;
 };
 
-export const renderBtn = type => {
+const renderBtn = type => {
   if (type) {
     return `<span class="addToList remove"><i class="fas fa-minus-circle"></i> </span>`;
   } else {
@@ -33,26 +33,28 @@ export const renderBtn = type => {
   }
 };
 
+export const createIng = (ing, shopping_list) => {
+  let type = false;
+  shopping_list.forEach(item => {
+    if (item.item === ing) {
+      type = true;
+    }
+  });
+  // get respective button
+  const btn = renderBtn(type);
+  return `${btn}<p class="ingredientTitle">${ing}</p>`;
+};
+
+export const toggleBtn = markup => {};
+
 const getIngredientsString = (ingredients, shopping_list) => {
   // loop through array and create array of HTML
   let ingrArray = [];
   ingredients.forEach(ing => {
-    let type = false;
-    let itemArr = [];
-    let index = 0;
-    let itemName = "";
     // check if item is on shopping list
-    shopping_list.forEach(item => {
-      itemArr = item.item.split(" ");
-      index = itemArr.findIndex(e => e === "</span>");
-      itemName = itemArr.splice(index + 1).join(" ");
-      if (itemName === ing) {
-        type = true;
-      }
-    });
-    // get respective button
-    const btn = renderBtn(type);
-    ingrArray.push(`<li class="ingList__item">${btn} ${ing}</li>`);
+    ingrArray.push(
+      `<li class = "ingList__item">${createIng(ing, shopping_list)}</li>`
+    );
   });
   // join array and return
   return ingrArray.join("");

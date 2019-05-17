@@ -1,4 +1,5 @@
 import { elements as el } from "./base";
+import { createIng } from "./recipeView";
 
 export const addListItem = item => {
   const markup = `
@@ -7,7 +8,11 @@ export const addListItem = item => {
   el.shoppingList.insertAdjacentHTML("beforeend", markup);
 };
 
-export const deleteListItem = id => {
-  const item = document.querySelector(`[data-itemid="${id}"]`);
-  if (item) item.parentElement.removeChild(item);
+export const deleteListItem = (id, shopping_list) => {
+  const item = shopping_list.list.find(e => e.id === id);
+  shopping_list.removeItem(id);
+  const markup = createIng(item.item, shopping_list.list);
+  console.log(markup);
+  const itemObj = document.querySelector(`[data-itemid="${id}"]`);
+  if (itemObj) itemObj.parentElement.removeChild(itemObj);
 };
