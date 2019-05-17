@@ -1,12 +1,10 @@
 export const elements = {
   searchForm: document.querySelector(".navbar__search"),
   searchInput: document.querySelector(".navbar__search--input"),
-  searchResList: document.querySelector(".recipes__list"),
-  allListItems: document.querySelectorAll(".recipes__list"),
+  recipeList: document.querySelector(".recipes__list"),
   paginationBtns: document.querySelector(".recipes__pagination"),
-  recipePage: document.querySelector(".display-recipe"),
+  recipe: document.querySelector(".display-recipe"),
   footer: document.querySelector(".footer"),
-  ingredientsList: document.querySelector(".display-recipe"),
   shoppingList: document.querySelector(".shopping_list-list"),
   addButton: document.querySelector(".addToList")
 };

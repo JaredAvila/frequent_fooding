@@ -152,7 +152,13 @@
 }
 
 .addToList {
-  color: green;
   padding: 1rem;
   cursor: pointer;
+}
+
+.add {
+  color: green;
+}
+.remove {
+  color: $color-red;
 }

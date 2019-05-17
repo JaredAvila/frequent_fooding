@@ -5,11 +5,10 @@ export default class List {
     this.list = [];
   }
 
-  addItem(item, btn) {
+  addItem(item) {
     const newItem = {
       id: uniqid(),
-      item,
-      btn
+      item
     };
     this.list.push(newItem);
     return newItem;
@@ -17,8 +16,6 @@ export default class List {
 
   removeItem(id) {
     const index = this.list.findIndex(el => el.id === id);
-    const btn = this.list.find(el => el.id === id).btn;
     this.list.splice(index, 1);
-    return btn;
   }
 }

@@ -2,6 +2,21 @@
   width: 25%;
   background-color: white;
 
+  &__title {
+    background-color: $color-red;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 1rem;
+    font-size: 2.6rem;
+    text-align: center;
+  }
+
+  &__sub {
+    text-align: center;
+    color: $color-dark;
+    font-size: 1.2rem;
+  }
+
   &-list {
     list-style: none;
   }

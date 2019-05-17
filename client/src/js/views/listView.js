@@ -2,10 +2,8 @@ import { elements as el } from "./base";
 
 export const addListItem = item => {
   const markup = `
-        <li class="listItem" data-itemid="${item.id}">${
-    item.item
-  } <i class="fas fa-minus-circle"></i></li>
-    `;
+        <li class="listItem" data-itemid="${item.id}">${item.item}<hr /></li>
+  `;
   el.shoppingList.insertAdjacentHTML("beforeend", markup);
 };
 

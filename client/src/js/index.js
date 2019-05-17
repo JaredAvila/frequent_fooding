@@ -16,6 +16,7 @@ import Likes from "./models/Likes";
 
 // Global State
 const state = {};
+state.list = new List();
 
 //TESTING
 window.state = state;
@@ -31,7 +32,7 @@ const search = async () => {
     // 3. Perpare UI to recieve results
     searchView.clearInput();
     searchView.clearResults();
-    spinner(el.searchResList);
+    spinner(el.recipeList);
     // 4. Search for recipes
     try {
       await state.search.getRecipes();
@@ -41,14 +42,6 @@ const search = async () => {
       console.log(error);
     }
     clearSpinner();
-  }
-};
-
-const toggleAddButton = (btn, type) => {
-  if (btn) {
-    type
-      ? (btn.style.visibility = "hidden")
-      : (btn.style.visibility = "visible");
   }
 };
 
@@ -70,7 +63,7 @@ el.paginationBtns.addEventListener("click", e => {
 
 recipeView.noRecipe();
 
-el.searchResList.addEventListener("click", e => {
+el.recipeList.addEventListener("click", e => {
   const recipe = e.target.closest(".recipes__list--item");
   if (recipe) {
     //get recipe ID
@@ -79,7 +72,7 @@ el.searchResList.addEventListener("click", e => {
     state.curRecipe = new Recipe(state.search.recipes[id].recipe);
     //prepare UI for recipe
     recipeView.clearRecipe();
-    recipeView.renderRecipe(state.curRecipe);
+    recipeView.renderRecipe(state.curRecipe, state.list.list);
     searchView.addActive(recipe);
     //scroll back to top
     window.scrollTo(0, 0);
@@ -87,20 +80,18 @@ el.searchResList.addEventListener("click", e => {
 });
 
 // Ingredients/Likes Controller
-el.ingredientsList.addEventListener("click", e => {
-  // Add to shopping list
+el.recipe.addEventListener("click", e => {
+  // ********Add to shopping list
   // Get list string
   if (e.target.closest(".ingList__item")) {
     const listITem = e.target.closest(".ingList__item").innerHTML;
     // Add new item to Shopping List
-    if (!state.list) state.list = new List();
-    const button = e.target.closest(".addToList");
-    const newItem = state.list.addItem(listITem, button);
+    const newItem = state.list.addItem(listITem);
     // Update UI
     listView.addListItem(newItem);
-    toggleAddButton(button, true);
+    // toggle button
 
-    // add to Likes list
+    // **************add to Likes list
   } else if (e.target.closest(".like-btn")) {
     // check state for likes, create if none.
     if (!state.likes) state.likes = new Likes();
@@ -136,9 +127,9 @@ el.ingredientsList.addEventListener("click", e => {
 el.shoppingList.addEventListener("click", e => {
   // Remove Item from list
   const id = e.target.closest(".listItem").dataset.itemid;
-  const btn = state.list.removeItem(id);
+  state.list.removeItem(id);
   // Update UI
   listView.deleteListItem(id);
-  toggleAddButton(btn, false);
+  // toggle button
 });
 displayFooter();

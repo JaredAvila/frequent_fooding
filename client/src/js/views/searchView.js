@@ -25,7 +25,7 @@ const displayRecipe = (recipe, recipes) => {
                     </div>
                 </li>
             `;
-  el.searchResList.insertAdjacentHTML("beforeend", html);
+  el.recipeList.insertAdjacentHTML("beforeend", html);
 };
 
 const createButton = (page, type) => {
@@ -86,6 +86,6 @@ export const addActive = node => {
 };
 
 export const clearResults = () => {
-  el.searchResList.innerHTML = "";
+  el.recipeList.innerHTML = "";
   el.paginationBtns.innerHTML = "";
 };

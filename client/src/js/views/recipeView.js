@@ -1,5 +1,4 @@
 import { elements as el } from "./base";
-import * as math from "mathjs";
 
 const getNutritionalInfo = (info, servings) => {
   //  loop through array, parse info and create array of HTML
@@ -26,19 +25,40 @@ export const getIngredientsArray = ingredients => {
   return ingArray;
 };
 
-const getIngredientsString = ingredients => {
+export const renderBtn = type => {
+  if (type) {
+    return `<span class="addToList remove"><i class="fas fa-minus-circle"></i> </span>`;
+  } else {
+    return `<span class="addToList add"><i class="fas fa-plus-circle"></i> </span>`;
+  }
+};
+
+const getIngredientsString = (ingredients, shopping_list) => {
   // loop through array and create array of HTML
   let ingrArray = [];
   ingredients.forEach(ing => {
-    ingrArray.push(
-      `<li class="ingList__item"><span class="addToList"><i class="fas fa-plus-circle"></i></span> ${ing}</li>`
-    );
+    let type = false;
+    let itemArr = [];
+    let index = 0;
+    let itemName = "";
+    // check if item is on shopping list
+    shopping_list.forEach(item => {
+      itemArr = item.item.split(" ");
+      index = itemArr.findIndex(e => e === "</span>");
+      itemName = itemArr.splice(index + 1).join(" ");
+      if (itemName === ing) {
+        type = true;
+      }
+    });
+    // get respective button
+    const btn = renderBtn(type);
+    ingrArray.push(`<li class="ingList__item">${btn} ${ing}</li>`);
   });
   // join array and return
   return ingrArray.join("");
 };
 
-export const renderRecipe = recipe => {
+export const renderRecipe = (recipe, shopping_list) => {
   const html = `
               <div class="recipe">
                 <div class="recipe__top">
@@ -90,7 +110,7 @@ export const renderRecipe = recipe => {
                   <div class="recipe__bottom__left">
                     <ul class="recipe__bottom--ingList">
                       <p class="recipe__bottom--ingList-title">Ingredients</p>
-                      ${getIngredientsString(recipe.ingredients)}
+                      ${getIngredientsString(recipe.ingredients, shopping_list)}
                     </ul>
                     <a target="_blank" class="recipe__bottom--ingList-link" href="${
                       recipe.url
@@ -98,13 +118,13 @@ export const renderRecipe = recipe => {
                   </div>   
               </div>
     `;
-  el.recipePage.innerHTML = html;
+  el.recipe.innerHTML = html;
 };
 
 export const clearRecipe = () => {
-  el.recipePage.innerHTML = "";
+  el.recipe.innerHTML = "";
 };
 
 export const noRecipe = () => {
-  el.recipePage.innerHTML = `<p class="noRecipes">Search for a recipe</p>`;
+  el.recipe.innerHTML = `<p class="noRecipes">Search for a recipe</p>`;
 };
