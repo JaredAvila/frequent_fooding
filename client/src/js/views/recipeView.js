@@ -45,8 +45,6 @@ export const createIng = (ing, shopping_list) => {
   return `${btn}<p class="ingredientTitle">${ing}</p>`;
 };
 
-export const toggleBtn = markup => {};
-
 const getIngredientsString = (ingredients, shopping_list) => {
   // loop through array and create array of HTML
   let ingrArray = [];

@@ -85,7 +85,6 @@ el.recipe.addEventListener("click", e => {
   const classArr = Array.from(e.target.classList);
   // Get list string
   if (classArr.find(e => e === "ingredientTitle")) {
-    console.log(e.target.parentElement);
     const listITem = e.target.closest(".ingredientTitle").innerHTML;
     // Add new item to Shopping List
     const newItem = state.list.addItem(listITem);
@@ -138,11 +137,13 @@ el.recipe.addEventListener("click", e => {
 
 // List Controller
 el.shoppingList.addEventListener("click", e => {
-  // Remove Item from list
+  // Remove Item from list and update UI
   const id = e.target.closest(".listItem").dataset.itemid;
-  // Update UI
-  listView.deleteListItem(id, state.list);
-  state.list.removeItem(id);
-  // toggle button
+  const newList = listView.deleteListItem(
+    id,
+    state.list,
+    state.curRecipe.ingredients
+  );
+  state.list = newList;
 });
 displayFooter();
