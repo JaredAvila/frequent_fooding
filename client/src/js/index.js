@@ -100,7 +100,6 @@ const checkTheList = listItem => {
     // **************add to Likes list
   } else if (!type) {
     //remove list item
-    // listView.deleteListItem(id, state.list, state.curRecipe.ingredients);
     listView.deleteItem(id);
     let markup = recipeView.removeIng(listItem, state.list.list);
     state.list.removeItem(id);
@@ -121,7 +120,6 @@ el.recipe.addEventListener("click", e => {
     // Add new item to Shopping List
     const listItem = e.target.parentElement.nextSibling.innerHTML;
     const markup = checkTheList(listItem);
-    console.log(e.target.parentElement.parentElement);
     e.target.parentElement.parentElement.innerHTML = markup;
     // }
   } else if (e.target.closest(".like-btn")) {
