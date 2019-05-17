@@ -79,6 +79,35 @@ el.recipeList.addEventListener("click", e => {
   }
 });
 
+const checkTheList = listItem => {
+  let type = true;
+  let id;
+  state.list.list.forEach(item => {
+    if (item.item === listItem) {
+      //remove item
+      type = false;
+      id = item.id;
+    }
+  });
+
+  if (type) {
+    // Add new item to Shopping List
+    const newItem = state.list.addItem(listItem);
+    // Update UI
+    listView.addListItem(newItem);
+    // toggle button
+    return recipeView.createIng(newItem.item, state.list.list);
+    // **************add to Likes list
+  } else if (!type) {
+    //remove list item
+    // listView.deleteListItem(id, state.list, state.curRecipe.ingredients);
+    listView.deleteItem(id);
+    let markup = recipeView.removeIng(listItem, state.list.list);
+    state.list.removeItem(id);
+    return markup;
+  }
+};
+
 // Ingredients/Likes Controller
 el.recipe.addEventListener("click", e => {
   // ********Add to shopping list
@@ -86,27 +115,16 @@ el.recipe.addEventListener("click", e => {
   // Get list string
   if (classArr.find(e => e === "ingredientTitle")) {
     const listITem = e.target.closest(".ingredientTitle").innerHTML;
-    // Add new item to Shopping List
-    const newItem = state.list.addItem(listITem);
-    // Update UI
-    listView.addListItem(newItem);
-    // toggle button
-    const newMarkup = recipeView.createIng(newItem.item, state.list.list);
-    e.target.parentElement.innerHTML = newMarkup;
-    // **************add to Likes list
+    const markup = checkTheList(listITem);
+    e.target.parentElement.innerHTML = markup;
   } else if (classArr.find(e => e === "fas")) {
     // Add new item to Shopping List
-    const newItem = state.list.addItem(
-      e.target.parentElement.nextSibling.innerHTML
-    );
-    // Update UI
-    listView.addListItem(newItem);
-    // toggle button
-    const newMarkup = recipeView.createIng(newItem.item, state.list.list);
-    e.target.parentElement.parentElement.innerHTML = newMarkup;
+    const listItem = e.target.parentElement.nextSibling.innerHTML;
+    const markup = checkTheList(listItem);
+    console.log(e.target.parentElement.parentElement);
+    e.target.parentElement.parentElement.innerHTML = markup;
+    // }
   } else if (e.target.closest(".like-btn")) {
-    // check state for likes, create if none.
-    if (!state.likes) state.likes = new Likes();
     // add/remove recipe
     if (
       state.likes.likes.findIndex(

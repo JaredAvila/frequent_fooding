@@ -34,3 +34,8 @@ export const deleteListItem = (id, shopping_list, ingredients) => {
   if (itemObj) itemObj.parentElement.removeChild(itemObj);
   return shopping_list;
 };
+
+export const deleteItem = id => {
+  const itemObj = document.querySelector(`[data-itemid="${id}"]`);
+  if (itemObj) itemObj.parentElement.removeChild(itemObj);
+};

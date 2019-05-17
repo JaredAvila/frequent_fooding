@@ -33,6 +33,18 @@ const renderBtn = type => {
   }
 };
 
+export const removeIng = (ing, shopping_list) => {
+  let type = true;
+  shopping_list.forEach(item => {
+    if (item.item === ing) {
+      type = false;
+    }
+  });
+  // get respective button
+  const btn = renderBtn(type);
+  return `${btn}<p class="ingredientTitle">${ing}</p>`;
+};
+
 export const createIng = (ing, shopping_list) => {
   let type = false;
   shopping_list.forEach(item => {
