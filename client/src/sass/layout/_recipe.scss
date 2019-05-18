@@ -27,11 +27,13 @@
         display: flex;
         justify-content: space-between;
 
-        i {
-          font-size: 1.8rem;
-          color: $color-dark;
-          padding: 1.2rem;
-          cursor: pointer;
+        .like-btn {
+          i {
+            font-size: 1.8rem;
+            color: $color-dark;
+            padding: 1.2rem;
+            cursor: pointer;
+          }
         }
       }
 
@@ -59,8 +61,9 @@
     display: flex;
 
     .nutrition {
-      flex: 1;
-      margin: 2rem 1rem;
+      width: 30rem;
+      margin: 2rem 0rem;
+      margin-right: 2rem;
       padding: 0.5rem;
       height: fit-content;
       font-size: 1.3rem;
@@ -163,4 +166,13 @@
 }
 .remove {
   color: $color-red;
+}
+
+.recipesLIkes {
+  display: flex;
+
+  .fas,
+  .far {
+    justify-self: flex-end;
+  }
 }

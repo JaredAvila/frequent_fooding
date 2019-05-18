@@ -17,6 +17,7 @@ import Likes from "./models/Likes";
 // Global State
 const state = {};
 state.list = new List();
+state.likes = new Likes();
 
 //TESTING
 window.state = state;
@@ -72,7 +73,7 @@ el.recipeList.addEventListener("click", e => {
     state.curRecipe = new Recipe(state.search.recipes[id].recipe);
     //prepare UI for recipe
     recipeView.clearRecipe();
-    recipeView.renderRecipe(state.curRecipe, state.list.list);
+    recipeView.renderRecipe(state.curRecipe, state.list.list, state.likes);
     searchView.addActive(recipe);
     //scroll back to top
     window.scrollTo(0, 0);
@@ -116,7 +117,10 @@ el.recipe.addEventListener("click", e => {
     const listITem = e.target.closest(".ingredientTitle").innerHTML;
     const markup = checkTheList(listITem);
     e.target.parentElement.innerHTML = markup;
-  } else if (classArr.find(e => e === "fas")) {
+  } else if (
+    classArr.find(e => e === "fa-minus-circle") ||
+    classArr.find(e => e === "fa-plus-circle")
+  ) {
     // Add new item to Shopping List
     const listItem = e.target.parentElement.nextSibling.innerHTML;
     const markup = checkTheList(listItem);
@@ -135,7 +139,7 @@ el.recipe.addEventListener("click", e => {
       const like = state.likes.likes.findIndex(
         e => e.recipe.title === state.curRecipe.title
       );
-      state.likes.removeLike(like.id);
+      state.likes.removeLike(state.likes.likes[like]);
     } else if (
       state.likes.likes.findIndex(
         e => e.recipe.title === state.curRecipe.title

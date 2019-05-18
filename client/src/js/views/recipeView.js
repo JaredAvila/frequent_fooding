@@ -70,7 +70,17 @@ const getIngredientsString = (ingredients, shopping_list) => {
   return ingrArray.join("");
 };
 
-export const renderRecipe = (recipe, shopping_list) => {
+const checkIfLiked = (recipe, likes) => {
+  if (likes.isLiked(recipe)) {
+    // recipe is liked
+    return `<i class="fas fa-heart" style="color: red"></i>`;
+  } else {
+    //recipe is not liked
+    return `<i class="far fa-heart"></i>`;
+  }
+};
+
+export const renderRecipe = (recipe, shopping_list, likes) => {
   const html = `
               <div class="recipe">
                 <div class="recipe__top">
@@ -81,10 +91,12 @@ export const renderRecipe = (recipe, shopping_list) => {
                     <h2 class="recipe__top--info-title">${recipe.title}</h2>
                     <h4 class="recipe__top--info-author">${recipe.author}</h4>
                     <div class="recipe__top--info-servingsLikes">
-                    <p class="recipe__top--info-servings"><i class="fas fa-utensils"></i> Serves: ${
-                      recipe.servings
-                    }</p>
-                    <p class="like-btn"><i class="far fa-heart"></i></p>
+                      <p class="recipe__top--info-servings"><i class="fas fa-utensils"></i> Serves: ${
+                        recipe.servings
+                      }</p>
+                      <p class="like-btn">
+                      ${checkIfLiked(recipe, likes)}
+                      </p>
                     </div>
                     <p class="recipe__top--info-calPer"><i class="fas fa-fire"></i> Calories per serving: ${
                       recipe.servings > 1
