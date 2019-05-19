@@ -127,6 +127,11 @@ el.recipe.addEventListener("click", e => {
     e.target.parentElement.parentElement.innerHTML = markup;
     // }
   } else if (e.target.closest(".like-btn")) {
+    const button = likesView.toggleNavBtn(false);
+    if (button) {
+      el.likeListBtn.innerHTML = button;
+    }
+    el.likesListContainer.style.display = "none";
     // add/remove recipe
     if (
       state.likes.likes.findIndex(
@@ -150,8 +155,6 @@ el.recipe.addEventListener("click", e => {
       e.target.closest(".like-btn").innerHTML = likesView.toggleLikesBtn(false);
       // UI: update UI in navbar
     }
-
-    console.log(state.likes);
   }
 });
 
@@ -166,4 +169,53 @@ el.shoppingList.addEventListener("click", e => {
   );
   state.list = newList;
 });
+
+// Likes List Controller
+el.likeListBtn.addEventListener("click", e => {
+  let btn = false;
+  el.likeListBtn.children[0].classList.forEach(className => {
+    className === "fa-heart" ? (btn = true) : btn;
+  });
+  if (btn) {
+    // ******** if likes btn = heart
+    // render likes list
+    const likesList = likesView.rednerLikesList(state.likes.likes);
+    el.likesListUL.innerHTML = likesList;
+    // show likes list
+    el.likesListContainer.style.display = "block";
+    // toggle likes btn
+    const button = likesView.toggleNavBtn(btn);
+    if (button) {
+      el.likeListBtn.innerHTML = button;
+    }
+  }
+});
+
+el.likesListContainer.addEventListener("click", e => {
+  const recipe = e.target.closest("li");
+  state.likes.likes.forEach(like => {
+    like.recipe.title === recipe.dataset.title
+      ? (state.curRecipe = like.recipe)
+      : state.curRecipe;
+  });
+  recipeView.renderRecipe(state.curRecipe, state.list.list, state.likes);
+  searchView.addActiveLikes(state.curRecipe, state.search.recipes);
+});
+
+window.addEventListener("click", e => {
+  let check = true;
+  e.target.classList.forEach(className => {
+    if (className === "fa-heart") {
+      check = false;
+    }
+  });
+  if (check) {
+    const button = likesView.toggleNavBtn(false);
+    if (button) {
+      el.likeListBtn.innerHTML = button;
+    }
+    el.likesListContainer.style.display = "none";
+  }
+});
+
 displayFooter();

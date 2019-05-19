@@ -1,5 +1,6 @@
 export default class Recipe {
   constructor(recipe) {
+    this.id = recipe.uri;
     this.title = recipe.label;
     this.img = recipe.image;
     this.author = recipe.source;

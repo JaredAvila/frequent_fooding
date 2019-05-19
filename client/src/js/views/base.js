@@ -6,7 +6,10 @@ export const elements = {
   recipe: document.querySelector(".display-recipe"),
   footer: document.querySelector(".footer"),
   shoppingList: document.querySelector(".shopping_list-list"),
-  addButton: document.querySelector(".addToList")
+  addButton: document.querySelector(".addToList"),
+  likeListBtn: document.querySelector(".navbar__favorites"),
+  likesListContainer: document.querySelector(".likesList"),
+  likesListUL: document.querySelector(".likesList__list")
 };
 
 export const loadingSpinner = parent => {

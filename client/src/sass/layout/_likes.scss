@@ -1,0 +1,51 @@
+.likesList {
+  position: absolute;
+  display: none;
+  top: 11rem;
+  right: 4.4rem;
+  background-color: #ff7866;
+  width: 30rem;
+  border-radius: 0.3rem;
+  box-shadow: 0.2rem 2rem 2rem grey;
+
+  &__list {
+    list-style: none;
+    padding: 1rem;
+
+    &--like {
+      position: relative;
+      color: white;
+      cursor: pointer;
+
+      &:hover &-title {
+        transform: scale(1.1) translateY(-0.7rem);
+        text-shadow: 0.2rem 0.2rem 0.5rem $color-dark;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 1rem;
+      }
+
+      &-img {
+        height: 8rem;
+        border-radius: 50%;
+        filter: brightness(0.6);
+      }
+      &-title {
+        position: absolute;
+        top: 2rem;
+        left: 3rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.1rem;
+        transition: $trans-default;
+      }
+    }
+  }
+}
+
+.noLikes {
+  font-size: 2rem;
+  text-align: center;
+  padding: 7rem 0;
+}

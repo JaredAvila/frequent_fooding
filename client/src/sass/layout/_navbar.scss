@@ -85,14 +85,14 @@
       color: $color-dark;
       cursor: pointer;
       transition: all 300ms ease;
+    }
 
-      &:hover {
-        color: $color-red-light;
-      }
+    &:hover i {
+      color: $color-red-light;
+    }
 
-      &:active {
-        color: $color-red-dark;
-      }
+    &:active i {
+      color: $color-red-dark;
     }
   }
 }

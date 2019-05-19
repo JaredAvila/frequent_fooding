@@ -15,7 +15,7 @@ const displayRecipe = (recipe, recipes) => {
                     <img class="recipes__list--item--img" src=${
                       recipe.recipe.image
                     } alt="Recipes">
-                    <div>
+                    <div data-id="${recipe.recipe.uri}">
                       <h2 class="recipes__list--item--label">${
                         recipe.recipe.label
                       }</h2>
@@ -83,6 +83,22 @@ export const addActive = node => {
   );
   recipeList.forEach(el => el.classList.remove("active"));
   node.classList.add("active");
+};
+
+export const addActiveLikes = (recipe, recipes) => {
+  const recipeList = Array.from(
+    document.querySelectorAll(".recipes__list--item")
+  );
+  recipeList.forEach(el => el.classList.remove("active"));
+  recipes.forEach(check => {
+    if (check.recipe.uri === recipe.id) {
+      recipeList.forEach(e => {
+        if (e.children[1].dataset.id === recipe.id) {
+          e.classList.add("active");
+        }
+      });
+    }
+  });
 };
 
 export const clearResults = () => {
