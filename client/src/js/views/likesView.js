@@ -24,7 +24,7 @@ export const rednerLikesList = likes => {
   }
   likes.forEach(like => {
     htmlArr.push(`
-        <li data-title="${like.recipe.title}" class="likesList__list--like">
+        <li data-id="${like.recipe.id}" class="likesList__list--like">
           <img
             src="${like.recipe.img}"
             class="likesList__list--like-img"

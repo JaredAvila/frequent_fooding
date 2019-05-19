@@ -134,21 +134,19 @@ el.recipe.addEventListener("click", e => {
     el.likesListContainer.style.display = "none";
     // add/remove recipe
     if (
-      state.likes.likes.findIndex(
-        e => e.recipe.title === state.curRecipe.title
-      ) !== -1
+      state.likes.likes.findIndex(e => e.recipe.id === state.curRecipe.id) !==
+      -1
     ) {
       // toggle button
       e.target.closest(".like-btn").innerHTML = likesView.toggleLikesBtn(true);
       // remove recipe from likes
       const like = state.likes.likes.findIndex(
-        e => e.recipe.title === state.curRecipe.title
+        e => e.recipe.id === state.curRecipe.id
       );
       state.likes.removeLike(state.likes.likes[like]);
     } else if (
-      state.likes.likes.findIndex(
-        e => e.recipe.title === state.curRecipe.title
-      ) === -1
+      state.likes.likes.findIndex(e => e.recipe.id === state.curRecipe.id) ===
+      -1
     ) {
       state.likes.addLike(state.curRecipe);
       // UI: toggle likes button
@@ -194,7 +192,7 @@ el.likeListBtn.addEventListener("click", e => {
 el.likesListContainer.addEventListener("click", e => {
   const recipe = e.target.closest("li");
   state.likes.likes.forEach(like => {
-    like.recipe.title === recipe.dataset.title
+    like.recipe.id === recipe.dataset.id
       ? (state.curRecipe = like.recipe)
       : state.curRecipe;
   });

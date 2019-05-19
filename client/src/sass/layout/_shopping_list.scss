@@ -26,13 +26,5 @@
   color: $color-dark;
   padding: 1rem;
   font-size: 1.6rem;
-  cursor: default;
-
-  i {
-    color: $color-red;
-    cursor: pointer;
-  }
-  span {
-    display: none;
-  }
+  cursor: pointer;
 }
